@@ -45,8 +45,6 @@ const Products = () => {
           </h1>
         </Divider>
 
-        {/*  */}
-
         <div>
           <Row
             gutter={{
