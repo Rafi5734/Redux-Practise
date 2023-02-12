@@ -25,7 +25,7 @@ const Products = () => {
   const [description, setDescription] = useState("");
 
     const fetchProduct = async () => {
-      const result = await fetch("https://fakestoreapi.com/products");
+      const result = await fetch("./fake_data.json");
       const data = await result.json();
         // console.log(data);
       setProducts(data)
@@ -85,11 +85,18 @@ const Products = () => {
                       />
                     }
                   >
-                    <Meta
+                    {/* <Meta
                       style={{ marginBottom: "10px" }}
                       title={product.title.substring(-1, 45) + "..."}
                       description={
                         product.description.substring(-1, 165) + "..."
+                      }
+                    /> */}
+                    <Meta
+                      style={{ marginBottom: "10px" }}
+                      title={product.name}
+                      description={
+                        product.description
                       }
                     />
                     <Typography.Title

@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop",
+    "description": "A high-performance laptop for all your computing needs.",
+    "price": 1000.0,
+    "category": "Electronics",
+    "rating": {
+      "rate": 3,
+      "count": 12
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwPodXVerko2nZ3w1AsQE1zWI5XiRgLnFFcA&usqp=CAU"
+  },
+  {
+    "id": 2,
+    "name": "Smartphone",
+    "description": "A powerful smartphone with the latest features.",
+    "price": 700.0,
+    "category": "Electronics",
+    "rating": {
+      "rate": 3.8,
+      "count": 25
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE7epNN0wNPfVXFwsHtVd_PODH--0zX9zHqfQvrletdqHTIZrQDrt5Nav6YEdw2aLJEQw&usqp=CAU"
+  },
+  {
+    "id": 3,
+    "name": "Tablet",
+    "description": "A sleek and portable tablet for all your entertainment needs.",
+    "price": 500.0,
+    "category": "Electronics",
+    "rating": {
+      "rate": 2.6,
+      "count": 245
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRuNBvQRtzmetl2cXsWKWk55pTu-72hPSkyA&usqp=CAU"
+  },
+  {
+    "id": 4,
+    "name": "Power Drill",
+    "description": "A powerful drill for all your DIY needs.",
+    "price": 150.0,
+    "category": "Tools",
+    "rating": {
+      "rate": 2.6,
+      "count": 126
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnZXDtU6lXvoyYfqad3o11IZ9rS08MtVajig&usqp=CAU"
+  },
+  {
+    "id": 5,
+    "name": "Circular Saw",
+    "description": "A versatile saw for all your cutting needs.",
+    "price": 200.0,
+    "category": "Tools",
+    "rating": {
+      "rate": 1.5,
+      "count": 231
+    },
+    "image": "https://img1.freepng.es/20180620/lla/kisspng-circular-saw-robert-bosch-gmbh-jigsaw-skil-circular-saw-5b2a3a2fba9186.1573771215294940637642.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Hammer",
+    "description": "A sturdy hammer for all your nailing needs.",
+    "price": 20.0,
+    "category": "Tools",
+    "rating": {
+      "rate": 4.3,
+      "count": 67
+    },
+    "image": "https://img1.freepng.es/20171221/sfw/hammer-png-clipart-5a3bc527a11946.6939832015138665356599.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Blender",
+    "description": "A powerful blender for all your mixing needs.",
+    "price": 80.0,
+    "category": "Home Goods",
+    "rating": {
+      "rate": 3.0,
+      "count": 87
+    },
+    "image": "https://img1.freepng.es/20180331/cow/kisspng-blender-mixer-food-processor-small-appliance-home-blender-5ac0439e9a1c36.4942781815225496626312.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Coffee Maker",
+    "description": "A convenient coffee maker for all your brewing needs.",
+    "price": 50.0,
+    "category": "Home Goods",
+    "rating": {
+      "rate": 2.3,
+      "count": 56
+    },
+    "image": "https://img1.freepng.es/20180131/isq/kisspng-brewed-coffee-coffeemaker-iced-coffee-hamilton-bea-hand-with-coffee-maker-5a722f17a22fb2.4603618315174325996643.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Toaster",
+    "description": "A reliable toaster for all your breakfast needs.",
+    "price": 30.0,
+    "category": "Home Goods",
+    "rating": {
+      "rate": 3,
+      "count": 24
+    },
+    "image": "https://img1.freepng.es/20180131/xge/kisspng-toaster-oven-hamilton-beach-brands-kitchen-toaster-microwave-oven-5a728022ac4a50.6721138815174533467057.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Sneakers",
+    "description": "A stylish and comfortable pair of sneakers.",
+    "price": 100.0,
+    "category": "Fashion",
+    "rating": {
+      "rate": 4.5,
+      "count": 32
+    },
+    "image": "https://img1.freepng.es/20180327/ase/kisspng-adidas-yeezy-adidas-originals-shoe-sneakers-sneakers-5aba2368363ae5.5931723215221482002221.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Jacket",
+    "description": "A warm and stylish jacket for cold weather.",
+    "price": 150.0,
+    "category": "Fashion",
+    "rating": {
+      "rate": 1.4,
+      "count": 43
+    },
+    "image": "https://img1.freepng.es/20180126/tdq/kisspng-denim-levi-strauss-co-jacket-clothing-jeans-us-silk-straight-denim-jacket-5a6ade0b64ab87.6295198615169530994124.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Jeans",
+    "description": "A versatile and comfortable pair of jeans.",
+    "price": 80.0,
+    "category": "Fashion",
+    "rating": {
+      "rate": 2.3,
+      "count": 56
+    },
+    "image": "https://img1.freepng.es/20180125/rjw/kisspng-jeans-t-shirt-trousers-slim-fit-pants-clothing-men-s-jeans-5a6a62b251bdf2.9602136615169215223348.jpg"
+  },
+  {
+    "id": 13,
+    "name": "T-Shirt",
+    "description": "A soft and comfortable t-shirt.",
+    "price": 20.0,
+    "category": "Fashion",
+    "rating": {
+      "rate": 3,
+      "count": 45
+    },
+    "image": "https://img1.freepng.es/20180131/swe/kisspng-t-shirt-top-sleeve-clothing-black-t-shirt-5a719ab88fe201.5981985615173946165894.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Bookshelf",
+    "description": "A sturdy bookshelf for all your books.",
+    "price": 100.0,
+    "category": "Furniture",
+    "rating": {
+      "rate": 2.3,
+      "count": 78
+    },
+    "image": "https://img1.freepng.es/20180302/kgq/kisspng-shelf-table-bookcase-furniture-japanese-minimalist-bookshelf-5a992e118a03d5.9692956215199882415653.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Office Chair",
+    "description": "A comfortable office chair for all your work needs.",
+    "price": 150.0,
+    "category": "Furniture",
+    "rating": {
+      "rate": 2.5,
+      "count": 64
+    },
+    "image": "https://img1.freepng.es/20171220/ace/office-chair-png-image-5a3b2587b62766.2402926415138256717461.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Sofa",
+    "description": "A cozy sofa for all your lounging needs.",
+    "price": 800.0,
+    "category": "Furniture",
+    "rating": {
+      "rate": 2.5,
+      "count": 94
+    },
+    "image": "https://img1.freepng.es/20180222/fgw/kisspng-window-living-room-curtain-couch-furniture-american-simple-casual-single-modern-sofa-5a8f756b774db5.6603042315193511474887.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Bicycle",
+    "description": "A versatile and eco-friendly mode of transportation.",
+    "price": 500.0,
+    "rating": {
+      "rate": 3.3,
+      "count": 49
+    },
+    "category": "Sports & Outdoors",
+    "image": "https://img1.freepng.es/20171221/wse/bicycle-mtb-dh-bike-png-image-5a3c444a6aeb31.586640281513899082438.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Camping Tent",
+    "description": "A sturdy and spacious camping tent for all your outdoor adventures.",
+    "price": 200.0,
+    "category": "Sports & Outdoors",
+    "rating": {
+      "rate": 3.5,
+      "count": 234
+    },
+    "image": "https://img1.freepng.es/20180927/ezz/kisspng-ohnana-tents-camping-light-amazon-com-ohnana-tents-the-ultimate-cool-tent-designed-for-5bad8895070242.9664695215380993490287.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Backpack",
+    "description": "A spacious and durable backpack for all your outdoor needs.",
+    "price": 80.0,
+    "category": "Sports & Outdoors",
+    "rating": {
+      "rate": 2,
+      "count": 200
+    },
+    "image": "https://img1.freepng.es/20171221/oqw/school-backpack-clipart-5a3b951cc82b31.7848053215138542368199.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Hiking Boots",
+    "description": "A sturdy and comfortable pair of hiking boots.",
+    "price": 120.0,
+    "category": "Sports & Outdoors",
+    "rating": {
+      "rate": 1.5,
+      "count": 24
+    },
+    "image": "https://img1.freepng.es/20180802/lkh/kisspng-hiking-boot-gore-tex-shoe-treksta-men-39-s-adt-201-mid-gtx-surround-day-hik-5b63701a11f873.5692017715332434180736.jpg"
+  }
+]

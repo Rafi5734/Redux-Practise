@@ -15,15 +15,26 @@ const onOk = (value) => {
 const Cart = () => {
     const columns = [
       {
+        title: "Image",
+        dataIndex: "image",
+        key: "image",
+        render: (text) => (
+          <img
+            style={{
+              height: "60px",
+              width: "60px",
+              marginTop: "20px",
+              borderRadius: "20px",
+            }}
+            alt="example"
+            src="https://img1.freepng.es/20180802/lkh/kisspng-hiking-boot-gore-tex-shoe-treksta-men-39-s-adt-201-mid-gtx-surround-day-hik-5b63701a11f873.5692017715332434180736.jpg"
+          />
+        ),
+      },
+      {
         title: "Name",
         dataIndex: "name",
         key: "name",
-        render: (text) => <a>{text}</a>,
-      },
-      {
-        title: "Age",
-        dataIndex: "age",
-        key: "age",
       },
       {
         title: "Address",
