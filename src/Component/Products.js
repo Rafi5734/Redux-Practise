@@ -12,6 +12,10 @@ import {
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Paragraph from 'antd/es/skeleton/Paragraph';
+import { add } from "../store/CartSlice";
+import { useDispatch } from 'react-redux';
+
+
 const { Meta } = Card;
 const { Text, Link } = Typography;
 const style = {
@@ -23,6 +27,7 @@ const style = {
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [description, setDescription] = useState("");
+  const dispatch = useDispatch()
 
     const fetchProduct = async () => {
       const result = await fetch("./fake_data.json");
@@ -37,6 +42,10 @@ const Products = () => {
     useEffect(() => {
       fetchProduct();
     }, []);
+  
+  const handleAddButton = (product) => {
+    dispatch(add(product));
+  }
     return (
       <div style={{ padding: "20px" }}>
         <Divider orientation="left">
@@ -95,9 +104,7 @@ const Products = () => {
                     <Meta
                       style={{ marginBottom: "10px" }}
                       title={product.name}
-                      description={
-                        product.description
-                      }
+                      description={product.description}
                     />
                     <Typography.Title
                       style={{ marginTop: "10px", color: "#f759ab" }}
@@ -127,6 +134,7 @@ const Products = () => {
                       <Button
                         type="primary"
                         style={{ backgroundColor: "green", color: "white" }}
+                        onClick={() => handleAddButton(product)}
                       >
                         Add to cart
                       </Button>
