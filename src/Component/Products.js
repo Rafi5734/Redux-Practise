@@ -42,9 +42,20 @@ const Products = () => {
     useEffect(() => {
       fetchProduct();
     }, []);
-  
+  var tempArr = [];
   const handleAddButton = (product) => {
-    dispatch(add(product));
+    
+    
+    const findSameItem = tempArr.find((pro) => pro.id === product.id);
+    tempArr.push(product);
+    console.log(tempArr);
+    console.log(findSameItem);
+    if (findSameItem === undefined) {
+      dispatch(add(product));
+    } else {
+      alert("founded")
+    }
+    
   }
     return (
       <div style={{ padding: "20px" }}>

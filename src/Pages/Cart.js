@@ -1,6 +1,6 @@
 import { Col, Row, Space, Table, Tag, Card, Select, DatePicker, Button } from "antd";
 import React from 'react';
-
+import { useSelector } from "react-redux";
 
 
 const { RangePicker } = DatePicker;
@@ -13,6 +13,8 @@ const onOk = (value) => {
 };
 
 const Cart = () => {
+  const items = useSelector(state => state.cart)
+  console.log("Items Selected: ", items);
     const columns = [
       {
         title: "Image",
