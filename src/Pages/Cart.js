@@ -1,6 +1,19 @@
-import { Col, Row, Space, Table, Tag, Card, Select, DatePicker, Button } from "antd";
+import {
+  Col,
+  Row,
+  Space,
+  InputNumber,
+  Table,
+  Tag,
+  Card,
+  Select,
+  DatePicker,
+  Button,
+} from "antd";
 import React from 'react';
 import { useSelector } from "react-redux";
+import { PlusOutlined } from "@ant-design/icons";
+
 
 
 const { RangePicker } = DatePicker;
@@ -15,6 +28,9 @@ const onOk = (value) => {
 const Cart = () => {
   const items = useSelector(state => state.cart)
   console.log("Items Selected: ", items);
+  const onChange = (value) => {
+    console.log("changed", value);
+  };
     const columns = [
       {
         title: "Image",
@@ -39,28 +55,31 @@ const Cart = () => {
         key: "name",
       },
       {
-        title: "Address",
-        dataIndex: "address",
-        key: "address",
+        title: "Details",
+        dataIndex: "details",
+        key: "details",
       },
       {
-        title: "Tags",
-        key: "tags",
-        dataIndex: "tags",
-        render: (_, { tags }) => (
+        title: "Quantity",
+        key: "quantity",
+        dataIndex: "quantity",
+        render: () => (
           <>
-            {tags.map((tag) => {
-              let color = tag.length > 5 ? "geekblue" : "green";
-              if (tag === "loser") {
-                color = "volcano";
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag.toUpperCase()}
-                </Tag>
-              );
-            })}
+            <InputNumber
+              size="large"
+              min={1}
+              max={100000}
+              defaultValue={3}
+              onChange={onChange}
+            />
           </>
+        ),
+      },
+      {
+        title: "Price",
+        key: "price",
+        render: () => (
+          <p style={{fontWeight: "bold"}}>$1000</p>
         ),
       },
       {
@@ -68,8 +87,10 @@ const Cart = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a>Invite {record.name}</a>
-            <a>Delete</a>
+            <Button type="dashed">Edit</Button>
+            <Button type="dashed" danger>
+              Delete
+            </Button>
           </Space>
         ),
       },

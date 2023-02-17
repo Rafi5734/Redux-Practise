@@ -8,7 +8,12 @@ import {
   Card,
   Typography,
   Rate,
+  notification,
+  message
 } from "antd";
+import {
+  BorderBottomOutlined,
+} from "@ant-design/icons";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Paragraph from 'antd/es/skeleton/Paragraph';
@@ -26,8 +31,11 @@ const style = {
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [description, setDescription] = useState("");
   const dispatch = useDispatch()
+
+  // Notification functionality start
+
+  // Notification functionality end
 
     const fetchProduct = async () => {
       const result = await fetch("./fake_data.json");
@@ -47,13 +55,14 @@ const Products = () => {
     
     
     const findSameItem = tempArr.find((pro) => pro.id === product.id);
-    tempArr.push(product);
+    
     console.log(tempArr);
     console.log(findSameItem);
     if (findSameItem === undefined) {
       dispatch(add(product));
+      tempArr.push(product);
     } else {
-      alert("founded")
+      message.warning("Item already exists in cart!");
     }
     
   }
