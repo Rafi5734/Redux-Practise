@@ -2,10 +2,8 @@ import React from 'react';
 import {
   HomeOutlined,
   ShoppingCartOutlined,
-  ClockCircleOutlined,
-  ShoppingOutlined,
 } from "@ant-design/icons";
-import { Menu, Avatar, Badge, Space } from "antd";
+import { Menu, Badge, Space } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";

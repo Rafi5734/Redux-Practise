@@ -9,17 +9,17 @@ import {
   Typography,
   Rate,
   notification,
-  message
+  message,
+  Alert,
 } from "antd";
-import {
-  BorderBottomOutlined,
-} from "@ant-design/icons";
-import { useState } from 'react';
-import { useEffect } from 'react';
-import Paragraph from 'antd/es/skeleton/Paragraph';
+import { BorderBottomOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { useEffect } from "react";
+import Paragraph from "antd/es/skeleton/Paragraph";
 import { add } from "../store/CartSlice";
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProduct } from "../store/productSlice";
+import { STATUS } from "../store/productSlice";
 
 const { Meta } = Card;
 const { Text, Link } = Typography;
@@ -28,145 +28,146 @@ const style = {
   padding: "8px 0",
 };
 
-
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const dispatch = useDispatch()
+  const { data: products, status } = useSelector((state) => state.product);
+  const items = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   // Notification functionality start
 
   // Notification functionality end
 
-    const fetchProduct = async () => {
-      const result = await fetch("./fake_data.json");
-      const data = await result.json();
-        // console.log(data);
-      setProducts(data)
-      console.log(data);
-  };
-  
-  
+  //   const fetchProduct = async () => {
+  //     const result = await fetch("./fake_data.json");
+  //     const data = await result.json();
+  //       // console.log(data);
+  //     setProducts(data)
+  //     console.log(data);
+  // };
+  // console.log("product", products);
+  // items.find((i) => console.log(i === items));
+  // console.log("item", items);
 
-    useEffect(() => {
-      fetchProduct();
-    }, []);
-  var tempArr = [];
-  const handleAddButton = (product) => {
-    
-    
-    const findSameItem = tempArr.find((pro) => pro.id === product.id);
-    
-    console.log(tempArr);
-    console.log(findSameItem);
-    if (findSameItem === undefined) {
+  useEffect(() => {
+    dispatch(fetchProduct());
+    // console.log(products);
+    // fetchProduct();
+  }, []);
+  const handleAddButton = (id, product) => {
+    const findProduct = items.find((product) => {
+      return product.id === id;
+    });
+    if (findProduct === undefined) {
       dispatch(add(product));
-      tempArr.push(product);
     } else {
-      message.warning("Item already exists in cart!");
+      message.warning("Product already added into the cart!");
     }
-    
-  }
-    return (
-      <div style={{ padding: "20px" }}>
-        <Divider orientation="left">
-          <h1 style={{ color: "#faad14" }}>
-            All Products: <span>20</span>
-          </h1>
-        </Divider>
+  };
 
-        <div>
-          <Row
-            gutter={{
-              xs: 8,
-              sm: 16,
-              md: 15,
-              lg: 20,
-            }}
-          >
-            {products.map((product) => (
-              <Col
-                key={product.id}
-                className="gutter-row"
-                xs={24}
-                sm={24}
-                md={12}
-                lg={6}
-                style={{ marginTop: "20px" }}
-              >
-                <div>
-                  <Card
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "column",
-                    }}
-                    cover={
-                      <img
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          marginTop: "20px",
-                        }}
-                        alt="example"
-                        src={product.image}
-                      />
-                    }
-                  >
-                    {/* <Meta
+  if (status === STATUS.LOADING) {
+    return <h1>Loading...</h1>;
+  }
+  return (
+    <div style={{ padding: "20px" }}>
+      <Divider orientation="left">
+        <h1 style={{ color: "#faad14" }}>
+          All Products: <span>{products.length}</span>
+        </h1>
+      </Divider>
+
+      <div>
+        <Row
+          gutter={{
+            xs: 8,
+            sm: 16,
+            md: 15,
+            lg: 20,
+          }}
+        >
+          {products.map((product) => (
+            <Col
+              key={product.id}
+              className="gutter-row"
+              xs={24}
+              sm={24}
+              md={12}
+              lg={6}
+              style={{ marginTop: "20px" }}
+            >
+              <div>
+                <Card
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
+                  cover={
+                    <img
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        marginTop: "20px",
+                      }}
+                      alt="example"
+                      src={product.image}
+                    />
+                  }
+                >
+                  {/* <Meta
                       style={{ marginBottom: "10px" }}
                       title={product.title.substring(-1, 45) + "..."}
                       description={
                         product.description.substring(-1, 165) + "..."
                       }
                     /> */}
-                    <Meta
-                      style={{ marginBottom: "10px" }}
-                      title={product.name}
-                      description={product.description}
-                    />
-                    <Typography.Title
-                      style={{ marginTop: "10px", color: "#f759ab" }}
-                      level={5}
+                  <Meta
+                    style={{ marginBottom: "10px" }}
+                    title={product.name}
+                    description={product.description}
+                  />
+                  <Typography.Title
+                    style={{ marginTop: "10px", color: "#f759ab" }}
+                    level={5}
+                  >
+                    Price: ${product.price}
+                  </Typography.Title>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Rate allowHalf disabled value={product.rating.rate} />
+                    <Text type="success" style={{ fontWeight: "bold" }}>
+                      Star: ${product.rating.count}
+                    </Text>
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "10px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Button type="primary">Details</Button>
+                    <Button
+                      type="primary"
+                      style={{ backgroundColor: "green", color: "white" }}
+                      onClick={() => handleAddButton(product.id, product)}
                     >
-                      Price: ${product.price}
-                    </Typography.Title>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Rate allowHalf disabled value={product.rating.rate} />
-                      <Text type="success" style={{ fontWeight: "bold" }}>
-                        Star: ${product.rating.count}
-                      </Text>
-                    </div>
-                    <div
-                      style={{
-                        marginTop: "10px",
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Button type="primary">Details</Button>
-                      <Button
-                        type="primary"
-                        style={{ backgroundColor: "green", color: "white" }}
-                        onClick={() => handleAddButton(product)}
-                      >
-                        Add to cart
-                      </Button>
-                    </div>
-                  </Card>
-                </div>
-              </Col>
-            ))}
-          </Row>
-        </div>
+                      Add to cart
+                    </Button>
+                  </div>
+                </Card>
+              </div>
+            </Col>
+          ))}
+        </Row>
       </div>
-    );
+    </div>
+  );
 };
 
 export default Products;

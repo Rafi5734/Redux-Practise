@@ -10,9 +10,14 @@ const cartSlice = createSlice({
       //pure function???
       // return [...state, action.payload]
       state.push(action.payload);
+      // console.log("action----", action);
     },
     remove(state, action) {
-      return state.filter((item) => item.name !== action.payload);
+      return state.filter((item) => item.id !== action.payload);
+    },
+    totalCartItemPrice(state, action) {
+      // console("state ---", state);
+      // console("action ---", action);
     },
   },
 });

@@ -5,6 +5,7 @@
     "description": "A high-performance laptop for all your computing needs.",
     "price": 1000.0,
     "category": "Electronics",
+    "quantity": 1,
     "rating": {
       "rate": 3,
       "count": 12
@@ -17,6 +18,7 @@
     "description": "A powerful smartphone with the latest features.",
     "price": 700.0,
     "category": "Electronics",
+    "quantity": 1,
     "rating": {
       "rate": 3.8,
       "count": 25
@@ -29,6 +31,7 @@
     "description": "A sleek and portable tablet for all your entertainment needs.",
     "price": 500.0,
     "category": "Electronics",
+    "quantity": 1,
     "rating": {
       "rate": 2.6,
       "count": 245
@@ -41,6 +44,7 @@
     "description": "A powerful drill for all your DIY needs.",
     "price": 150.0,
     "category": "Tools",
+    "quantity": 1,
     "rating": {
       "rate": 2.6,
       "count": 126
@@ -53,6 +57,7 @@
     "description": "A versatile saw for all your cutting needs.",
     "price": 200.0,
     "category": "Tools",
+    "quantity": 1,
     "rating": {
       "rate": 1.5,
       "count": 231
@@ -65,6 +70,7 @@
     "description": "A sturdy hammer for all your nailing needs.",
     "price": 20.0,
     "category": "Tools",
+    "quantity": 1,
     "rating": {
       "rate": 4.3,
       "count": 67
@@ -77,6 +83,7 @@
     "description": "A powerful blender for all your mixing needs.",
     "price": 80.0,
     "category": "Home Goods",
+    "quantity": 1,
     "rating": {
       "rate": 3.0,
       "count": 87
@@ -89,6 +96,7 @@
     "description": "A convenient coffee maker for all your brewing needs.",
     "price": 50.0,
     "category": "Home Goods",
+    "quantity": 1,
     "rating": {
       "rate": 2.3,
       "count": 56
@@ -101,6 +109,7 @@
     "description": "A reliable toaster for all your breakfast needs.",
     "price": 30.0,
     "category": "Home Goods",
+    "quantity": 1,
     "rating": {
       "rate": 3,
       "count": 24
@@ -113,6 +122,7 @@
     "description": "A stylish and comfortable pair of sneakers.",
     "price": 100.0,
     "category": "Fashion",
+    "quantity": 1,
     "rating": {
       "rate": 4.5,
       "count": 32
@@ -125,6 +135,7 @@
     "description": "A warm and stylish jacket for cold weather.",
     "price": 150.0,
     "category": "Fashion",
+    "quantity": 1,
     "rating": {
       "rate": 1.4,
       "count": 43
@@ -137,6 +148,7 @@
     "description": "A versatile and comfortable pair of jeans.",
     "price": 80.0,
     "category": "Fashion",
+    "quantity": 1,
     "rating": {
       "rate": 2.3,
       "count": 56
@@ -149,6 +161,7 @@
     "description": "A soft and comfortable t-shirt.",
     "price": 20.0,
     "category": "Fashion",
+    "quantity": 1,
     "rating": {
       "rate": 3,
       "count": 45
@@ -161,6 +174,7 @@
     "description": "A sturdy bookshelf for all your books.",
     "price": 100.0,
     "category": "Furniture",
+    "quantity": 1,
     "rating": {
       "rate": 2.3,
       "count": 78
@@ -173,6 +187,7 @@
     "description": "A comfortable office chair for all your work needs.",
     "price": 150.0,
     "category": "Furniture",
+    "quantity": 1,
     "rating": {
       "rate": 2.5,
       "count": 64
@@ -185,6 +200,7 @@
     "description": "A cozy sofa for all your lounging needs.",
     "price": 800.0,
     "category": "Furniture",
+    "quantity": 1,
     "rating": {
       "rate": 2.5,
       "count": 94
@@ -201,6 +217,7 @@
       "count": 49
     },
     "category": "Sports & Outdoors",
+    "quantity": 1,
     "image": "https://img1.freepng.es/20171221/wse/bicycle-mtb-dh-bike-png-image-5a3c444a6aeb31.586640281513899082438.jpg"
   },
   {
@@ -209,6 +226,7 @@
     "description": "A sturdy and spacious camping tent for all your outdoor adventures.",
     "price": 200.0,
     "category": "Sports & Outdoors",
+    "quantity": 1,
     "rating": {
       "rate": 3.5,
       "count": 234
@@ -221,6 +239,7 @@
     "description": "A spacious and durable backpack for all your outdoor needs.",
     "price": 80.0,
     "category": "Sports & Outdoors",
+    "quantity": 1,
     "rating": {
       "rate": 2,
       "count": 200
@@ -233,6 +252,7 @@
     "description": "A sturdy and comfortable pair of hiking boots.",
     "price": 120.0,
     "category": "Sports & Outdoors",
+    "quantity": 1,
     "rating": {
       "rate": 1.5,
       "count": 24
