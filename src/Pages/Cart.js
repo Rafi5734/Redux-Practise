@@ -23,13 +23,20 @@ const Cart = () => {
   const { Meta } = Card;
   const items = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [itemPrice, setItemPrice] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [findItem, setFindItem] = useState({});
 
-  const onChange = (value, id) => {
-    console.log("changed", id);
+  const onChange = (id, e) => {
+    const findIncrementItem = items.find((item) => item.id === id);
+    setFindItem(findIncrementItem);
   };
 
   const handleQuantityChange = (value) => {
-    console.log(value); // Handle the change in quantity here
+    setQuantity(value); // Handle the change in quantity here
+    console.log("quantity", value);
+    findItem["quantity"] = value;
+    console.log("findIncrementItem", findItem.quantity);
   };
 
   const quantityFormatter = (value) => `${value} item(s)`;
@@ -43,7 +50,14 @@ const Cart = () => {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
-  console.log("cart item", items);
+  useEffect(() => {
+    console.log("cart item", items);
+    const sumOfCartPrice = items.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.price;
+    }, 0);
+    console.log("cart item sum", sumOfCartPrice);
+    setItemPrice(sumOfCartPrice);
+  }, [items]);
 
   return (
     <div>
@@ -88,7 +102,7 @@ const Cart = () => {
                 >
                   <Meta title={item.name} description={item.description} />
                   <p style={{ fontWeight: "bold" }}>
-                    Price: $<span>{item.price}</span>
+                    Price: $<span>{item.price * quantity}</span>
                   </p>
                   <InputNumber
                     size="large"
@@ -101,8 +115,8 @@ const Cart = () => {
                       marginTop: "10px",
                       marginBottom: "10px",
                     }}
-                    defaultValue={item.price}
-                    onClick={onChange}
+                    defaultValue={item.quantity}
+                    onClick={() => onChange(item.id)}
                   />
                   <Button
                     type="primary"
@@ -130,14 +144,14 @@ const Cart = () => {
                     fontWeight: "600",
                   }}
                 >
-                  Total amount: $<span>1000</span>
+                  Total amount: $<span>{itemPrice}</span>
                 </h1>
                 <h2
                   style={{
                     fontWeight: "600",
                   }}
                 >
-                  Total item: <span>10</span>
+                  Total item: <span>{items.length}</span>
                 </h2>
                 <p
                   style={{
