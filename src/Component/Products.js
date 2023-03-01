@@ -33,10 +33,6 @@ const Products = () => {
   const items = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // Notification functionality start
-
-  // Notification functionality end
-
   //   const fetchProduct = async () => {
   //     const result = await fetch("./fake_data.json");
   //     const data = await result.json();
@@ -50,8 +46,6 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(fetchProduct());
-    // console.log(products);
-    // fetchProduct();
   }, []);
   const handleAddButton = (id, product) => {
     const findProduct = items.find((product) => {
@@ -59,6 +53,7 @@ const Products = () => {
     });
     if (findProduct === undefined) {
       dispatch(add(product));
+      message.success("Product add!");
     } else {
       message.warning("Product already added into the cart!");
     }

@@ -9,11 +9,14 @@ import {
   DatePicker,
   Button,
   Divider,
+  Input,
 } from "antd";
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { remove } from "../store/CartSlice";
+import cartIncreDecre from "./cart.css";
 
 const onOk = (value) => {
   console.log("onOk: ", value);
@@ -104,20 +107,16 @@ const Cart = () => {
                   <p style={{ fontWeight: "bold" }}>
                     Price: $<span>{item.price * quantity}</span>
                   </p>
-                  <InputNumber
-                    size="large"
-                    min={1}
-                    formatter={quantityFormatter}
-                    parser={quantityParser}
-                    onChange={handleQuantityChange}
-                    style={{
-                      width: "100%",
-                      marginTop: "10px",
-                      marginBottom: "10px",
-                    }}
-                    defaultValue={item.quantity}
-                    onClick={() => onChange(item.id)}
-                  />
+                  <div className="cartIncreDecre">
+                    <Button icon={<MinusOutlined />} />
+                    <Input
+                      placeholder="Product Quantity"
+                      style={{ marginBottom: "10px" }}
+                      value={item.quantity}
+                    />
+                    <Button icon={<PlusOutlined />} />
+                  </div>
+
                   <Button
                     type="primary"
                     danger
