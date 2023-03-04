@@ -16,13 +16,14 @@ const cartSlice = createSlice({
       return state.filter((item) => item.id !== action.payload);
     },
     totalCartItemPrice(state, action) {
-      // console("state ---", state);
-      // console("action ---", action);
+      const { id } = action.payload;
+      console.log("action----", action);
+      // return state.filter((item) => item.id === action.payload);
     },
   },
 });
 
 
-export const { add, remove } = cartSlice.actions;       //what is the meaning of actions??
+export const { add, remove, totalCartItemPrice } = cartSlice.actions;       //what is the meaning of actions??
 
 export default cartSlice.reducer;                       //what is the meaning of reducer???

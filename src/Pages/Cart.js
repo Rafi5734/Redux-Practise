@@ -15,7 +15,7 @@ import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { remove } from "../store/CartSlice";
+import { remove, totalCartItemPrice } from "../store/CartSlice";
 import cartIncreDecre from "./cart.css";
 
 const onOk = (value) => {
@@ -29,6 +29,7 @@ const Cart = () => {
   const [itemPrice, setItemPrice] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [findItem, setFindItem] = useState({});
+  const [productQuantity, setProductQuantity] = useState();
 
   const onChange = (id, e) => {
     const findIncrementItem = items.find((item) => item.id === id);
@@ -61,6 +62,16 @@ const Cart = () => {
     console.log("cart item sum", sumOfCartPrice);
     setItemPrice(sumOfCartPrice);
   }, [items]);
+
+  function quantityValue(id) {
+    const findProduct = items.find((item) => item.id === id);
+    setProductQuantity(findProduct.quantity);
+    console.log("quantity find", findProduct.quantity);
+  }
+
+  function handleIncrement(id) {
+    dispatch(totalCartItemPrice(id));
+  }
 
   return (
     <div>
@@ -113,8 +124,12 @@ const Cart = () => {
                       placeholder="Product Quantity"
                       style={{ marginBottom: "10px" }}
                       value={item.quantity}
+                      onBlur={() => quantityValue(item.id)}
                     />
-                    <Button icon={<PlusOutlined />} />
+                    <Button
+                      icon={<PlusOutlined />}
+                      onClick={() => handleIncrement(item.id)}
+                    />
                   </div>
 
                   <Button
