@@ -43,7 +43,7 @@ export function fetchProduct() {
       dispatch(setProducts(data));
       dispatch(setStatus(STATUS.SUCCESS));
 
-      console.log(data);
+      // console.log(data);
     } catch (e) {
       console.log(e);
       dispatch(setStatus(STATUS.ERROR));

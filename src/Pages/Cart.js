@@ -15,7 +15,11 @@ import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { remove, totalCartItemPrice } from "../store/CartSlice";
+import {
+  quantityIncrement,
+  remove,
+  quantityDecrement,
+} from "../store/CartSlice";
 import cartIncreDecre from "./cart.css";
 
 const onOk = (value) => {
@@ -30,7 +34,7 @@ const Cart = () => {
   const [quantity, setQuantity] = useState(1);
   const [findItem, setFindItem] = useState({});
   const [productQuantity, setProductQuantity] = useState();
-
+  const totalFinalAmount = [];
   const onChange = (id, e) => {
     const findIncrementItem = items.find((item) => item.id === id);
     setFindItem(findIncrementItem);
@@ -38,9 +42,9 @@ const Cart = () => {
 
   const handleQuantityChange = (value) => {
     setQuantity(value); // Handle the change in quantity here
-    console.log("quantity", value);
+    // console.log("quantity", value);
     findItem["quantity"] = value;
-    console.log("findIncrementItem", findItem.quantity);
+    // console.log("findIncrementItem", findItem.quantity);
   };
 
   const quantityFormatter = (value) => `${value} item(s)`;
@@ -48,31 +52,40 @@ const Cart = () => {
 
   function handleDelete(id) {
     dispatch(remove(id));
-    console.log("delete", id);
+    // console.log("delete", id);
+  }
+
+  function handleIncrement(id) {
+    const findProductQuantity = items.find((item) => {
+      return item.id === id;
+    });
+    dispatch(quantityIncrement(id));
+  }
+
+  function handleDecrement(id) {
+    const findProductQuantity = items.find((item) => {
+      return item.id === id;
+    });
+    dispatch(quantityDecrement(id));
   }
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
   useEffect(() => {
-    console.log("cart item", items);
-    const sumOfCartPrice = items.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue.price;
-    }, 0);
-    console.log("cart item sum", sumOfCartPrice);
-    setItemPrice(sumOfCartPrice);
-  }, [items]);
+    const totalPrice = items.map((item) =>
+      totalFinalAmount.push(item.quantity * item.price)
+    );
+    const sumOfCartItems = totalFinalAmount.reduce((acc, num) => acc + num, 0);
+    setItemPrice(sumOfCartItems);
+  }, [items, totalFinalAmount]);
 
   function quantityValue(id) {
     const findProduct = items.find((item) => item.id === id);
     setProductQuantity(findProduct.quantity);
-    console.log("quantity find", findProduct.quantity);
   }
 
-  function handleIncrement(id) {
-    dispatch(totalCartItemPrice(id));
-  }
-
+  console.log(items);
   return (
     <div>
       <Row>
@@ -119,7 +132,10 @@ const Cart = () => {
                     Price: $<span>{item.price * quantity}</span>
                   </p>
                   <div className="cartIncreDecre">
-                    <Button icon={<MinusOutlined />} />
+                    <Button
+                      icon={<MinusOutlined />}
+                      onClick={() => handleDecrement(item.id)}
+                    />
                     <Input
                       placeholder="Product Quantity"
                       style={{ marginBottom: "10px" }}
