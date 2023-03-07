@@ -27,11 +27,6 @@ export const { setProducts, setStatus } = productSlice.actions; //what is the me
 
 export default productSlice.reducer; //what is the meaning of reducer???
 
-// export const fetchProduct = createAsyncThunk("product/fetch", async () => {
-//   const result = await fetch("./fake_data.json");
-//     const data = await result.json();
-//     return data;
-// })
 
 export function fetchProduct() {
   return async function fetchProductThunk(dispatch, getState) {

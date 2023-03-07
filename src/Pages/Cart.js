@@ -2,14 +2,15 @@ import {
   Col,
   Row,
   Space,
-  InputNumber,
   Table,
   Card,
   Select,
   DatePicker,
   Button,
   Divider,
+  Form,
   Input,
+  message,
 } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
@@ -19,11 +20,11 @@ import {
   quantityIncrement,
   remove,
   quantityDecrement,
-  placeOrder
 } from "../store/CartSlice";
 import cartIncreDecre from "./cart.css";
+import { STATUS } from "../store/productSlice";
 
-
+const { Option } = Select;
 
 const Cart = () => {
   const { Meta } = Card;
@@ -36,8 +37,12 @@ const Cart = () => {
   const [orderMethod, setOrderMethod] = useState({});
   const [productQuantity, setProductQuantity] = useState();
   const totalFinalAmount = [];
-  
+  const [randNum, setRandNum] = useState();
 
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * 9000) + 1000;
+    setRandNum(randomNumber);
+  }, []);
 
   function handleDelete(id) {
     dispatch(remove(id));
@@ -52,21 +57,6 @@ const Cart = () => {
     dispatch(quantityDecrement(id));
   }
 
-  const handleChangePaymentMethod = (value) => {
-    setOrderMethod(value);
-  }
-
-  const handleChange = (value) => {
-    setOrderData(value);
-    console.log(`selected ${value}`);
-  };
-
-  const onOk = (value) => {
-    setOrderDate(value.$d);
-    console.log("onOk: ", value.$d);
-  };
-
-
   useEffect(() => {
     const totalPrice = items.map((item) =>
       totalFinalAmount.push(item.quantity * item.price)
@@ -80,21 +70,64 @@ const Cart = () => {
     setProductQuantity(findProduct.quantity);
   }
 
-  function demoFunc(message) {
-    console.log(message)
-  }
-
-  function handleOrder() {
-    const data = {
-      orderData: orderData,
-      orderDate: orderDate,
-      orderMethod: orderMethod,
+  const onFinish = (values) => {
+    if (values && items.length > 0) {
+      message.success("Order Confirmed Success!");
+    } else {
+      message.error("please place a new order!");
     }
-    dispatch(placeOrder({data}, demoFunc()))
-    console.log('Order date--', orderDate);
-    console.log('Order data--', orderData);
-    console.log('Order method--', orderMethod);
-  }
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  const formRef = React.useRef(null);
+  const onGenderChange = (value) => {
+    switch (value) {
+      case "bkash":
+        formRef.current?.setFieldsValue({
+          note: "Bkash",
+        });
+        break;
+      case "nagad":
+        formRef.current?.setFieldsValue({
+          note: "nagad",
+        });
+        break;
+      case "rocket":
+        formRef.current?.setFieldsValue({
+          note: "rocket",
+        });
+        break;
+      case "strip":
+        formRef.current?.setFieldsValue({
+          note: "strip",
+        });
+        break;
+      case "home":
+        formRef.current?.setFieldsValue({
+          note: "home",
+        });
+        break;
+      case "shop":
+        formRef.current?.setFieldsValue({
+          note: "shope",
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const config = {
+    rules: [
+      {
+        type: "object",
+        required: true,
+        message: "Please select time!",
+      },
+    ],
+  };
 
   // console.log(items);
   return (
@@ -173,7 +206,123 @@ const Cart = () => {
         </Col>
         <Col flex="0 0 500px" style={{ paddingLeft: "10px" }}>
           <Space size={20}>
-            <Card
+            <Form
+              name="basic"
+              labelCol={{
+                span: 8,
+              }}
+              wrapperCol={{
+                span: 16,
+              }}
+              style={{
+                border: "1px solid #f5f5f5",
+                width: "400px",
+                marginTop: "20px",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+                borderRadius: "5px",
+              }}
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <div style={{ marginBottom: "20px" }}>
+                <h1>Order Details</h1>
+              </div>
+              <hr style={{ marginBottom: "20px" }} />
+              <div>
+                <h1
+                  style={{
+                    fontWeight: "600",
+                  }}
+                >
+                  Total amount: $<span>{itemPrice}</span>
+                </h1>
+                <h2
+                  style={{
+                    fontWeight: "600",
+                  }}
+                >
+                  Total item: <span>{items.length}</span>
+                </h2>
+                <p
+                  style={{
+                    fontWeight: "600",
+                  }}
+                >
+                  Order Id:{" "}
+                  <span style={{ fontSize: "20px", marginLeft: "5px" }}>
+                    #{randNum}
+                  </span>
+                </p>
+              </div>
+              <Form.Item
+                label="Payment Method"
+                name="payment_method"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select a payment method!",
+                  },
+                ]}
+              >
+                <Select
+                  placeholder="Select a payment method"
+                  onChange={onGenderChange}
+                  allowClear
+                  style={{ marginLeft: "10px" }}
+                >
+                  <Option value="bkash">Bkash</Option>
+                  <Option value="nagad">Nagad</Option>
+                  <Option value="rocket">Rocket</Option>
+                  <Option value="strip">Strip</Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                label="Shipping Type"
+                name="shippingType"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select a shipping type",
+                  },
+                ]}
+              >
+                <Select
+                  placeholder="Select a shipping type!"
+                  onChange={onGenderChange}
+                  allowClear
+                  style={{ marginLeft: "10px" }}
+                >
+                  <Option value="home">To Home</Option>
+                  <Option value="shop">From Shop</Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item name="order_date" label="Place Order Date" {...config}>
+                <DatePicker style={{ width: "100%", marginLeft: "10px" }} />
+              </Form.Item>
+
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ width: "100%", marginTop: "10px" }}
+                >
+                  Place Order
+                </Button>
+              </Form.Item>
+            </Form>
+            {/* <Card
               title="Order Details"
               style={{
                 width: 390,
@@ -299,7 +448,7 @@ const Cart = () => {
                   Confirm the order
                 </Button>
               </div>
-            </Card>
+            </Card> */}
           </Space>
         </Col>
       </Row>
