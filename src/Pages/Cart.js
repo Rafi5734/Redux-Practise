@@ -19,12 +19,11 @@ import {
   quantityIncrement,
   remove,
   quantityDecrement,
+  placeOrder
 } from "../store/CartSlice";
 import cartIncreDecre from "./cart.css";
 
-const onOk = (value) => {
-  console.log("onOk: ", value);
-};
+
 
 const Cart = () => {
   const { Meta } = Card;
@@ -32,23 +31,13 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [itemPrice, setItemPrice] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [findItem, setFindItem] = useState({});
+  const [orderData, setOrderData] = useState({});
+  const [orderDate, setOrderDate] = useState({});
+  const [orderMethod, setOrderMethod] = useState({});
   const [productQuantity, setProductQuantity] = useState();
   const totalFinalAmount = [];
-  const onChange = (id, e) => {
-    const findIncrementItem = items.find((item) => item.id === id);
-    setFindItem(findIncrementItem);
-  };
+  
 
-  const handleQuantityChange = (value) => {
-    setQuantity(value); // Handle the change in quantity here
-    // console.log("quantity", value);
-    findItem["quantity"] = value;
-    // console.log("findIncrementItem", findItem.quantity);
-  };
-
-  const quantityFormatter = (value) => `${value} item(s)`;
-  const quantityParser = (value) => value.replace("item(s)", "");
 
   function handleDelete(id) {
     dispatch(remove(id));
@@ -56,22 +45,28 @@ const Cart = () => {
   }
 
   function handleIncrement(id) {
-    const findProductQuantity = items.find((item) => {
-      return item.id === id;
-    });
     dispatch(quantityIncrement(id));
   }
 
   function handleDecrement(id) {
-    const findProductQuantity = items.find((item) => {
-      return item.id === id;
-    });
     dispatch(quantityDecrement(id));
   }
 
+  const handleChangePaymentMethod = (value) => {
+    setOrderMethod(value);
+  }
+
   const handleChange = (value) => {
-    // console.log(`selected ${value}`);
+    setOrderData(value);
+    console.log(`selected ${value}`);
   };
+
+  const onOk = (value) => {
+    setOrderDate(value.$d);
+    console.log("onOk: ", value.$d);
+  };
+
+
   useEffect(() => {
     const totalPrice = items.map((item) =>
       totalFinalAmount.push(item.quantity * item.price)
@@ -85,7 +80,23 @@ const Cart = () => {
     setProductQuantity(findProduct.quantity);
   }
 
-  console.log(items);
+  function demoFunc(message) {
+    console.log(message)
+  }
+
+  function handleOrder() {
+    const data = {
+      orderData: orderData,
+      orderDate: orderDate,
+      orderMethod: orderMethod,
+    }
+    dispatch(placeOrder({data}, demoFunc()))
+    console.log('Order date--', orderDate);
+    console.log('Order data--', orderData);
+    console.log('Order method--', orderMethod);
+  }
+
+  // console.log(items);
   return (
     <div>
       <Row>
@@ -197,33 +208,33 @@ const Cart = () => {
                   Payment Method
                 </p>
                 <Select
-                  defaultValue="lucy"
+                  defaultValue="Select a payment method"
                   style={{
                     width: "100%",
                   }}
-                  onChange={handleChange}
+                  onChange={handleChangePaymentMethod}
                   options={[
                     {
-                      label: "Manager",
-                      options: [
-                        {
-                          label: "Jack",
-                          value: "jack",
-                        },
-                        {
-                          label: "Lucy",
-                          value: "lucy",
-                        },
-                      ],
+                      label: "Stripe",
+                      value: "Stripe",
                     },
                     {
-                      label: "Engineer",
-                      options: [
-                        {
-                          label: "yiminghe",
-                          value: "Yiminghe",
-                        },
-                      ],
+                      label: "Bkash",
+                      value: "Bkash",
+                    },
+                    {
+                      label: "Nagad",
+                      value: "Nagad",
+                    },
+                    {
+                      label: "Rocket",
+                      value: "Rocket",
+                    },
+                  ]}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
                     },
                   ]}
                 />
@@ -234,33 +245,25 @@ const Cart = () => {
                   Shipping Method
                 </p>
                 <Select
-                  defaultValue="lucy"
+                  defaultValue="Select a shipping method"
                   style={{
                     width: "100%",
                   }}
                   onChange={handleChange}
                   options={[
                     {
-                      label: "Manager",
-                      options: [
-                        {
-                          label: "Jack",
-                          value: "jack",
-                        },
-                        {
-                          label: "Lucy",
-                          value: "lucy",
-                        },
-                      ],
+                      label: "Shipped to home",
+                      value: "Shipped to home",
                     },
                     {
-                      label: "Engineer",
-                      options: [
-                        {
-                          label: "yiminghe",
-                          value: "Yiminghe",
-                        },
-                      ],
+                      label: "Shipped from store",
+                      value: "Shipped from store",
+                    },
+                  ]}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
                     },
                   ]}
                 />
@@ -270,8 +273,14 @@ const Cart = () => {
                 <DatePicker
                   style={{ width: "100%" }}
                   showTime
-                  onChange={onChange}
-                  onOk={onOk}
+                  onChange={onOk}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
+                    },
+                  ]}
+                  // onOk={}
                 />
                 <p style={{ margin: "0", padding: "0", marginTop: "15px" }}>
                   Set the date of the order to process.
@@ -282,8 +291,10 @@ const Cart = () => {
                     marginTop: "30px",
                     fontWeight: "bold",
                   }}
+                  htmlType="submit"
                   type="primary"
                   block
+                  onClick={handleOrder}
                 >
                   Confirm the order
                 </Button>
