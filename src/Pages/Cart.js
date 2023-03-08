@@ -33,7 +33,7 @@ const Cart = () => {
   const [itemPrice, setItemPrice] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [findItem, setFindItem] = useState({});
-  const [productQuantity, setProductQuantity] = useState();
+  const [randomNumber, setRandomNumber] = useState();
   const totalFinalAmount = [];
   const onChange = (id, e) => {
     const findIncrementItem = items.find((item) => item.id === id);
@@ -80,12 +80,18 @@ const Cart = () => {
     setItemPrice(sumOfCartItems);
   }, [items, totalFinalAmount]);
 
-  function quantityValue(id) {
-    const findProduct = items.find((item) => item.id === id);
-    setProductQuantity(findProduct.quantity);
-  }
+  // function quantityValue(id) {
+  //   const findProduct = items.find((item) => item.id === id);
+  //   setProductQuantity(findProduct.quantity);
+  // }
+  // console.log(items);
 
-  console.log(items);
+  useEffect(() => {
+    const randNum = Math.floor(Math.random() * 9000) + 1000;
+    setRandomNumber(randNum);
+    console.log(randNum);
+  }, []);
+
   return (
     <div>
       <Row>
@@ -140,7 +146,7 @@ const Cart = () => {
                       placeholder="Product Quantity"
                       style={{ marginBottom: "10px" }}
                       value={item.quantity}
-                      onBlur={() => quantityValue(item.id)}
+                      // onBlur={() => quantityValue(item.id)}
                     />
                     <Button
                       icon={<PlusOutlined />}
@@ -190,7 +196,7 @@ const Cart = () => {
                 >
                   Order Id:{" "}
                   <span style={{ fontSize: "20px", marginLeft: "5px" }}>
-                    #45667
+                    #{randomNumber}
                   </span>
                 </p>
                 <p style={{ margin: "0", padding: "0" }} required>
