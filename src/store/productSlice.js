@@ -12,18 +12,35 @@ const productSlice = createSlice({
   initialState: {
     data: [],
     status: STATUS.LOADING,
+    searchQuery: "",
   },
   reducers: {
     setProducts(state, action) {
       state.data = action.payload;
     },
+    toggleSortOrder(state, action) {
+      if (action.payload === "ascending") {
+        state.data.sort((a, b) => {
+          return a.price - b.price;
+        });
+      } else {
+        state.data.sort((a, b) => {
+          return b.price - a.price;
+        });
+      }
+    },
+    // searchProduct(state, action) {
+    //   console.log(action);
+    // },
+
     setStatus(state, action) {
       state.status = action.payload;
     },
   },
 });
 
-export const { setProducts, setStatus } = productSlice.actions; //what is the meaning of actions??
+export const { setProducts, setStatus, toggleSortOrder } =
+  productSlice.actions; //what is the meaning of actions??
 
 export default productSlice.reducer; //what is the meaning of reducer???
 

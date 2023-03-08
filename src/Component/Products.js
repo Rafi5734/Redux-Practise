@@ -8,22 +8,26 @@ import {
   Card,
   Typography,
   Rate,
-  notification,
   message,
-  Alert,
   Spin,
+  Input,
+  Select,
 } from "antd";
-import { BorderBottomOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useEffect } from "react";
-import Paragraph from "antd/es/skeleton/Paragraph";
 import { add } from "../store/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "../store/productSlice";
-import { STATUS } from "../store/productSlice";
+import {
+  fetchProduct,
+  STATUS,
+  toggleSortOrder,
+  // searchProduct,
+} from "../store/productSlice";
 
 const { Meta } = Card;
 const { Text, Link } = Typography;
+const { Option } = Select;
+const { Search } = Input;
 const style = {
   background: "#0092ff",
   padding: "8px 0",
@@ -33,10 +37,16 @@ const Products = () => {
   const { data: products, status } = useSelector((state) => state.product);
   const items = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [allProduct, setAllProduct] = useState([]);
 
   useEffect(() => {
     dispatch(fetchProduct());
   }, []);
+
+  useEffect(() => {
+    setAllProduct(products);
+  }, [products]);
+
   const handleAddButton = (id, product) => {
     const findProduct = items.find((product) => {
       return product.id === id;
@@ -65,13 +75,93 @@ const Products = () => {
       </Space>
     );
   }
+  const handleChange = (value) => {
+    console.log(value);
+    dispatch(toggleSortOrder(value));
+  };
+
+  const onSearch = (value) => {
+    // dispatch(searchProduct(value));
+    const filteredProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setAllProduct(filteredProducts);
+    console.log(filteredProducts);
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <Divider orientation="left">
-        <h1 style={{ color: "#faad14" }}>
-          All Products: <span>{products.length}</span>
-        </h1>
-      </Divider>
+    <div style={{ padding: "20px", width: "100%" }}>
+      <h1 style={{ color: "#faad14" }}>
+        All Products: <span>{products.length}</span>
+      </h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+        }}
+      >
+        <p
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft: "10px",
+          }}
+        >
+          Sort:{" "}
+        </p>
+        <Select
+          defaultValue="Select an option"
+          style={{
+            width: "20%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft: "10px",
+          }}
+          onChange={handleChange}
+          options={[
+            {
+              value: "ascending",
+              label: "Ascending",
+            },
+            {
+              value: "descending",
+              label: "Descending",
+            },
+          ]}
+        />
+        <div
+          style={{
+            marginLeft: "20px",
+            display: "flex",
+            flexDirection: "row",
+            width: "20%",
+          }}
+        >
+          <p
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: "10px",
+            }}
+          >
+            Search item:{" "}
+          </p>
+          <Search
+            placeholder="input search text"
+            onSearch={onSearch}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: "10px",
+            }}
+          />
+        </div>
+      </div>
 
       <div>
         <Row
@@ -82,7 +172,7 @@ const Products = () => {
             lg: 20,
           }}
         >
-          {products.map((product) => (
+          {allProduct.map((product) => (
             <Col
               key={product.id}
               className="gutter-row"

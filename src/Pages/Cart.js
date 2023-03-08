@@ -37,7 +37,8 @@ const Cart = () => {
   const [orderMethod, setOrderMethod] = useState({});
   const [randomNumber, setRandomNumber] = useState();
   const totalFinalAmount = [];
-  const [randNum, setRandNum] = useState();
+  const [randNum, setRandNum] = useState(0);
+  var prevNum = 0;
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 9000) + 1000;
@@ -79,7 +80,13 @@ const Cart = () => {
 
   const onFinish = (values) => {
     if (values && items.length > 0) {
-      message.success("Order Confirmed Success!");
+      if (randNum !== prevNum) {
+        message.success("Order Confirmed Success!");
+        prevNum = randNum;
+        console.log(prevNum);
+      } else {
+        message.error("Order already placed!");
+      }
     } else {
       message.error("please place a new order!");
     }
