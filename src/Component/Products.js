@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Button,
   Space,
@@ -11,6 +11,7 @@ import {
   notification,
   message,
   Alert,
+  Spin,
 } from "antd";
 import { BorderBottomOutlined } from "@ant-design/icons";
 import { useState } from "react";
@@ -33,17 +34,6 @@ const Products = () => {
   const items = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  //   const fetchProduct = async () => {
-  //     const result = await fetch("./fake_data.json");
-  //     const data = await result.json();
-  //       // console.log(data);
-  //     setProducts(data)
-  //     console.log(data);
-  // };
-  // console.log("product", products);
-  // items.find((i) => console.log(i === items));
-  // console.log("item", items);
-
   useEffect(() => {
     dispatch(fetchProduct());
   }, []);
@@ -60,7 +50,20 @@ const Products = () => {
   };
 
   if (status === STATUS.LOADING) {
-    return <h1>Loading...</h1>;
+    return (
+      <Space
+        size="middle"
+        style={{
+          width: "100%",
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Spin size="large" />
+      </Space>
+    );
   }
   return (
     <div style={{ padding: "20px" }}>

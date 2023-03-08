@@ -7,6 +7,9 @@ const store = configureStore({
     cart: cartReducer,
     product: productReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export default store;

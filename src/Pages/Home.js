@@ -8,12 +8,6 @@ const Home = () => {
     
     return (
       <div>
-        <div className="">
-          <Divider>
-            <h1>React Redux Toolkit Practice</h1>
-          </Divider>
-        </div>
-
         <Products />
       </div>
     );

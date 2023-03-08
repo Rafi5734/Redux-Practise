@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Alert, Space } from "antd";
 
+export const STATUS = Object.freeze({
+  IDLE: "idle",
+  ERROR: "error",
+  SUCCESS: "success",
+  LOADING: "loading",
+});
 const initialState = [];
 var globalState = {
   quantity: 1,
@@ -35,9 +42,14 @@ const cartSlice = createSlice({
       }
       console.log("state----", action);
     },
+    setStatus(state, action) {
+      state.status = action.payload;
+    },
+    
   },
 });
 
-export const { add, remove, quantityIncrement, quantityDecrement } = cartSlice.actions; //what is the meaning of actions??
+export const { add, remove, quantityIncrement, quantityDecrement, placeOrder } =
+  cartSlice.actions; //what is the meaning of actions??
 
 export default cartSlice.reducer; //what is the meaning of reducer???
