@@ -1,0 +1,9 @@
+.ant-card-head-title{
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.ant-card-body{
+    width: 50%;
+    margin-top: 20px;
+}

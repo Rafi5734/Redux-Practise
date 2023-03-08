@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  FileAddOutlined,
   HomeOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
@@ -19,15 +20,26 @@ const Navbar = () => {
     {
       label: (
         <Space size="large">
-          <Badge style={{ marginLeft: "100px" }} count={cartItems.length}>
-            <Link to="/cart" style={{ paddingRight: "8px" }}>
+          <Link to="/cart" style={{ paddingRight: "8px" }}>
+            <Badge style={{ marginLeft: "100px" }} count={cartItems.length}>
               Cart
-            </Link>
-          </Badge>
+            </Badge>
+          </Link>
         </Space>
       ),
       key: "cart",
       icon: <ShoppingCartOutlined style={{ fontSize: "18px" }} />,
+    },
+    {
+      label: (
+        <Space size="large">
+          <Link to="/add_product" style={{ paddingRight: "8px" }}>
+            Add Product
+          </Link>
+        </Space>
+      ),
+      key: "addProduct",
+      icon: <FileAddOutlined style={{ fontSize: "18px" }} />,
     },
   ];
   const [current, setCurrent] = useState("/");

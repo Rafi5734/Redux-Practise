@@ -29,10 +29,6 @@ const productSlice = createSlice({
         });
       }
     },
-    // searchProduct(state, action) {
-    //   console.log(action);
-    // },
-
     setStatus(state, action) {
       state.status = action.payload;
     },

@@ -86,7 +86,6 @@ const Products = () => {
       product.name.toLowerCase().includes(value.toLowerCase())
     );
     setAllProduct(filteredProducts);
-    console.log(filteredProducts);
   };
 
   return (
@@ -112,7 +111,7 @@ const Products = () => {
           Sort:{" "}
         </p>
         <Select
-          defaultValue="Select an option"
+          defaultValue="Select an order"
           style={{
             width: "20%",
             display: "flex",
@@ -151,7 +150,7 @@ const Products = () => {
             Search item:{" "}
           </p>
           <Search
-            placeholder="input search text"
+            placeholder="Search a product"
             onSearch={onSearch}
             style={{
               display: "flex",

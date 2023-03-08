@@ -21,7 +21,6 @@ import {
   remove,
   quantityDecrement,
 } from "../store/CartSlice";
-import cartIncreDecre from "./cart.css";
 import { STATUS } from "../store/productSlice";
 
 const { Option } = Select;
