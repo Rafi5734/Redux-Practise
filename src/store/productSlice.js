@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const STATUS = Object.freeze({
   IDLE: "idle",
@@ -35,11 +35,9 @@ const productSlice = createSlice({
   },
 });
 
-export const { setProducts, setStatus, toggleSortOrder } =
-  productSlice.actions; //what is the meaning of actions??
+export const { setProducts, setStatus, toggleSortOrder } = productSlice.actions; //what is the meaning of actions??
 
 export default productSlice.reducer; //what is the meaning of reducer???
-
 
 export function fetchProduct() {
   return async function fetchProductThunk(dispatch, getState) {
