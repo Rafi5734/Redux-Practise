@@ -5,15 +5,24 @@ import {
   LoginOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Menu, Badge, Space } from "antd";
+import { Menu, Badge, Space, Button, Spin } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const authentication = useSelector((state) => state.authentication);
+  const navigate = useNavigate();
+  const { authentication } = useSelector((state) => state.authentication);
+  // setAuthenticateUser(authentication.authentication);
   console.log(authentication);
   const cartItems = useSelector((state) => state.cart);
+  const handleLogOut = () => {
+    localStorage.removeItem("login");
+    window.location.reload();
+
+    console.log("log out");
+  };
   const items = [
     {
       label: <Link to="/">Home</Link>,
@@ -44,12 +53,19 @@ const Navbar = () => {
       key: "addProduct",
       icon: <FileAddOutlined style={{ fontSize: "18px" }} />,
     },
+
     {
       label: (
         <Space size="large">
-          <Link to="/login" style={{ paddingRight: "0px" }}>
-            Login
-          </Link>
+          {authentication ? (
+            <Button type="text" onClick={handleLogOut}>
+              Logout
+            </Button>
+          ) : (
+            <Link to="/login" style={{ paddingRight: "0px" }}>
+              Login
+            </Link>
+          )}
         </Space>
       ),
       key: "login",
