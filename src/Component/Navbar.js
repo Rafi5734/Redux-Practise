@@ -2,6 +2,7 @@ import React from 'react';
 import {
   FileAddOutlined,
   HomeOutlined,
+  LoginOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Menu, Badge, Space } from "antd";
@@ -10,6 +11,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const authentication = useSelector((state) => state.authentication);
+  console.log(authentication);
   const cartItems = useSelector((state) => state.cart);
   const items = [
     {
@@ -40,6 +43,17 @@ const Navbar = () => {
       ),
       key: "addProduct",
       icon: <FileAddOutlined style={{ fontSize: "18px" }} />,
+    },
+    {
+      label: (
+        <Space size="large">
+          <Link to="/login" style={{ paddingRight: "0px" }}>
+            Login
+          </Link>
+        </Space>
+      ),
+      key: "login",
+      icon: <LoginOutlined style={{ fontSize: "18px" }} />,
     },
   ];
   const [current, setCurrent] = useState("/");

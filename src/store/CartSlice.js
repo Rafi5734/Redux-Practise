@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Alert, Space } from "antd";
 
 export const STATUS = Object.freeze({
   IDLE: "idle",
@@ -45,7 +44,6 @@ const cartSlice = createSlice({
     setStatus(state, action) {
       state.status = action.payload;
     },
-    
   },
 });
 

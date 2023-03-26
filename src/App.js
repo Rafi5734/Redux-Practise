@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import Details from './Pages/Details';
 import AddProduct from "./Pages/AddProduct";
+import Login from "./Component/Login";
+import PrivateComponent from "./Component/PrivateComponent";
 
 function App() {
   return (
@@ -15,10 +17,13 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/cart" element={<Cart />}></Route>
-            <Route path="/details" element={<Details />}></Route>
-            <Route path="/add_product" element={<AddProduct />}></Route>
+            <Route element={<PrivateComponent />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/details" element={<Details />} />
+              <Route path="/add_product" element={<AddProduct />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </Provider>
