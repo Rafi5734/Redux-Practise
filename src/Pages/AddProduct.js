@@ -14,6 +14,8 @@ import {
   Select,
 } from "antd";
 import "./addProduct.css";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../store/productSlice";
 
 const formItemLayout = {
   labelCol: {
@@ -46,9 +48,11 @@ const tailFormItemLayout = {
   },
 };
 const AddProduct = () => {
+  const dispatch = useDispatch();
   const { Option } = Select;
   const [form] = Form.useForm();
   const onFinish = (values) => {
+    dispatch(addProduct(values));
     console.log("Received values of form: ", values);
   };
   return (
@@ -88,21 +92,23 @@ const AddProduct = () => {
             >
               <Input />
             </Form.Item>
+
             <Form.Item
               name="price"
               label="Price"
               rules={[
                 {
                   type: "number",
-                  message: "This input for price",
+                  min: 0,
+                  max: 99999999,
                 },
                 {
                   required: true,
-                  message: "Please input your product price!",
+                  message: "Please input product price!",
                 },
               ]}
             >
-              <Input />
+              <InputNumber style={{ width: "100%" }} />
             </Form.Item>
             <Form.Item
               name="category"
@@ -123,13 +129,15 @@ const AddProduct = () => {
                 <Option value="food">Food</Option>
               </Select>
             </Form.Item>
+
             <Form.Item
               name="rating"
               label="Rating"
               rules={[
                 {
                   type: "number",
-                  message: "This input for rating",
+                  min: 0,
+                  max: 999,
                 },
                 {
                   required: true,
@@ -137,15 +145,17 @@ const AddProduct = () => {
                 },
               ]}
             >
-              <Input />
+              <InputNumber style={{ width: "100%" }} />
             </Form.Item>
+
             <Form.Item
               name="ratingCount"
               label="Rating Count"
               rules={[
                 {
                   type: "number",
-                  message: "This input for rating count",
+                  min: 0,
+                  max: 999,
                 },
                 {
                   required: true,
@@ -153,31 +163,17 @@ const AddProduct = () => {
                 },
               ]}
             >
-              <Input />
+              <InputNumber style={{ width: "100%" }} />
             </Form.Item>
-            <Form.Item
-              name="ratingCount"
-              label="Rating Count"
-              rules={[
-                {
-                  type: "number",
-                  message: "This input for rating count",
-                },
-                {
-                  required: true,
-                  message: "Please input product rating count!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+
             <Form.Item
               name="quantity"
               label="Quantity"
               rules={[
                 {
                   type: "number",
-                  message: "This input for product quantity",
+                  min: 0,
+                  max: 999,
                 },
                 {
                   required: true,
@@ -185,7 +181,7 @@ const AddProduct = () => {
                 },
               ]}
             >
-              <Input />
+              <InputNumber style={{ width: "100%" }} />
             </Form.Item>
             <Form.Item
               name="image"
@@ -217,7 +213,7 @@ const AddProduct = () => {
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
               <Button type="primary" htmlType="submit">
-                Add new
+                Add new product
               </Button>
             </Form.Item>
           </Form>

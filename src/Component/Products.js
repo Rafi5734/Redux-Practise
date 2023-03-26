@@ -34,10 +34,16 @@ const style = {
 };
 
 const Products = () => {
-  const { data: products, status } = useSelector((state) => state.product);
+  const {
+    data: products,
+    status,
+    addNewProduct,
+  } = useSelector((state) => state.product);
   const items = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [allProduct, setAllProduct] = useState([]);
+
+  console.log(addNewProduct);
 
   useEffect(() => {
     dispatch(fetchProduct());
@@ -46,6 +52,15 @@ const Products = () => {
   useEffect(() => {
     setAllProduct(products);
   }, [products]);
+
+  useEffect(() => {
+    if (addNewProduct.length > 0) {
+      const newProduct = addNewProduct.map((add) => {
+        console.log(add);
+      });
+      console.log(newProduct);
+    }
+  }, []);
 
   const handleAddButton = (id, product) => {
     const findProduct = items.find((product) => {

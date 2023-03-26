@@ -13,10 +13,17 @@ const productSlice = createSlice({
     data: [],
     status: STATUS.LOADING,
     searchQuery: "",
+    addNewProduct: [],
   },
   reducers: {
     setProducts(state, action) {
       state.data = action.payload;
+    },
+    addProduct(state, action) {
+      // state.data = action.payload;
+      // state.data = action.payload;
+      state.addNewProduct.push(action.payload);
+      console.log(action.payload);
     },
     toggleSortOrder(state, action) {
       if (action.payload === "ascending") {
@@ -35,7 +42,8 @@ const productSlice = createSlice({
   },
 });
 
-export const { setProducts, setStatus, toggleSortOrder } = productSlice.actions; //what is the meaning of actions??
+export const { setProducts, setStatus, toggleSortOrder, addProduct } =
+  productSlice.actions; //what is the meaning of actions??
 
 export default productSlice.reducer; //what is the meaning of reducer???
 
@@ -56,3 +64,18 @@ export function fetchProduct() {
     }
   };
 }
+// export function newProduct() {
+//   return async function newProductThunk(dispatch, getState) {
+//     dispatch(setStatus(STATUS.LOADING));
+//     try {
+//       dispatch(addProduct());
+
+//       // console.log(data);
+//     } catch (e) {
+//       console.log(e);
+//       dispatch(setStatus(STATUS.ERROR));
+//     }
+//   };
+// }
+
+
