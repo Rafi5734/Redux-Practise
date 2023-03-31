@@ -212,18 +212,11 @@ const Products = () => {
                         height: "100px",
                         marginTop: "20px",
                       }}
-                      alt="example"
+                      alt="Product_image"
                       src={product.image}
                     />
                   }
                 >
-                  {/* <Meta
-                      style={{ marginBottom: "10px" }}
-                      title={product.title.substring(-1, 45) + "..."}
-                      description={
-                        product.description.substring(-1, 165) + "..."
-                      }
-                    /> */}
                   <Meta
                     style={{ marginBottom: "10px" }}
                     title={product.name}

@@ -65,11 +65,6 @@ const Cart = () => {
     setItemPrice(sumOfCartItems);
   }, [items, totalFinalAmount]);
 
-  // function quantityValue(id) {
-  //   const findProduct = items.find((item) => item.id === id);
-  //   setProductQuantity(findProduct.quantity);
-  // }
-  // console.log(items);
 
   useEffect(() => {
     const randNum = Math.floor(Math.random() * 9000) + 1000;
